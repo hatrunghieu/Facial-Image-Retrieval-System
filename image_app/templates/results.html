@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="result-container">
+  <a href="{% url 'upload_image' %}"
+    ><button class="btn-submit">Back to home</button></a
+  >
+
+  <h1>Uploaded Image</h1>
+  <div class="uploaded-image">
+    {% if uploaded_file_url %}
+    <img src="{{ uploaded_file_url }}" alt="Uploaded" />
+    {% else %}
+    <p>No image uploaded.</p>
+    {% endif %}
+  </div>
+
+  <h1>Similar Faces</h1>
+  <div class="similar-faces">
+    <ul>
+      {% for result in results %}
+      <li>
+        <img src="{% static result.image_path %}" alt="Similar Face" />
+        <p>Name: {{ result.name }}</p>
+        <p>Distance: {{ result.distance }}</p>
+      </li>
+      {% empty %}
+      <li>No similar faces found.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

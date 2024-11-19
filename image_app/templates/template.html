@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="result-container">
+  <h2>Uploaded Image</h2>
+  <div class="uploaded-image">
+    <img src="{{ uploaded_file_url }}" />
+  </div>
+
+  <h2>Similar Faces</h2>
+  <div class="similar-faces">
+    <ul>
+      {% for result in results %}
+      <li>
+        <img src="{% static result.image_path %}" alt="Similar Face" />
+        <p>Distance: {{ result.distance }}</p>
+      </li>
+      {% empty %}
+      <li>No similar faces found.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
